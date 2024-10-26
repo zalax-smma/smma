@@ -1,0 +1,31 @@
+<!-- login.html -->
+<form id="login-form">
+    <input type="text" id="username" placeholder="Usuário" required />
+    <input type="password" id="password" placeholder="Senha" required />
+    <button type="submit">Login</button>
+  </form>
+  
+  <script>
+  document.getElementById('login-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+  
+    const response = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
+  
+    const data = await response.json();
+    if (response.ok) {
+      localStorage.setItem('token', data.token);
+      window.location.href = '/dashboard'; // Redireciona ao dashboard
+    } else {
+      alert(data.message); // Exibe erro
+    }
+  });
+  </script>
+  
