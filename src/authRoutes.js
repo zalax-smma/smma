@@ -5,13 +5,16 @@ const router = express.Router();
 
 // Usuário de exemplo para teste
 const USERS = [
-  { username: 'admin', password: await bcrypt.hash('senha123', 10) } // Altere a senha conforme necessário
+  { username: 'admin', password: '$2b$10$CjCEeu2k9fH3pxhfq49USuH7PIg7FCF/OzOD6BRDWgX4e9zEx5d6i' } // 'senha123' em hash bcrypt
 ];
 
 // Rota de login
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  
+
+  console.log('Usuário:', username); // Log para verificar o usuário
+  console.log('Senha:', password); // Log para verificar a senha
+
   // Encontra o usuário mockado
   const user = USERS.find(u => u.username === username);
 
